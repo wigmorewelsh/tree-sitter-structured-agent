@@ -47,8 +47,7 @@ module.exports = grammar({
     parameter: ($) =>
       seq(field("name", $.identifier), ":", field("type", $.type)),
 
-    type: ($) =>
-      choice("String", "Boolean", "i32", "Context", $.identifier, $.unit_type),
+    type: ($) => choice("String", "Boolean", $.identifier, $.unit_type),
 
     unit_type: ($) => seq("(", ")"),
 
@@ -81,25 +80,42 @@ module.exports = grammar({
     expression_statement: ($) => $.expression,
 
     if_statement: ($) =>
-      seq(
-        "if",
-        field("condition", $.expression),
-        field("consequence", $.block),
+      prec.right(
+        seq(
+          "if",
+          field("condition", $.expression),
+          field("consequence", $.block),
+          optional(
+            seq("else", field("alternative", choice($.block, $.if_statement))),
+          ),
+        ),
       ),
 
     while_statement: ($) =>
       seq("while", field("condition", $.expression), field("body", $.block)),
 
-    return_statement: ($) => seq("return", $.expression),
+    return_statement: ($) => prec.right(seq("return", optional($.expression))),
 
     expression: ($) =>
       choice(
+        $.if_expression,
         $.function_call,
         $.select_expression,
         $.identifier,
         $.string_literal,
         $.boolean_literal,
         $.placeholder,
+      ),
+
+    if_expression: ($) =>
+      prec.right(
+        1,
+        seq(
+          "if",
+          field("condition", $.expression),
+          field("consequence", $.block),
+          seq("else", field("alternative", choice($.block, $.if_expression))),
+        ),
       ),
 
     function_call: ($) =>
@@ -129,10 +145,21 @@ module.exports = grammar({
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     string_literal: ($) =>
-      seq(
-        '"',
-        repeat(choice(token.immediate(prec(1, /[^"\\]+/)), $.escape_sequence)),
-        '"',
+      choice(
+        seq(
+          '"',
+          repeat(
+            choice(token.immediate(prec(1, /[^"\\]+/)), $.escape_sequence),
+          ),
+          '"',
+        ),
+        seq(
+          '"""',
+          repeat(
+            choice($.escape_sequence, token.immediate(/[^"]|"[^"]|""[^"]/)),
+          ),
+          '"""',
+        ),
       ),
 
     escape_sequence: ($) =>

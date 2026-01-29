@@ -74,6 +74,10 @@
           "named": true
         },
         {
+          "type": "if_expression",
+          "named": true
+        },
+        {
           "type": "placeholder",
           "named": true
         },
@@ -232,9 +236,63 @@
     }
   },
   {
+    "type": "if_expression",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "if_expression",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          }
+        ]
+      },
       "condition": {
         "multiple": false,
         "required": true,
@@ -349,7 +407,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "expression",
@@ -563,6 +621,10 @@
     "named": false
   },
   {
+    "type": "\"\"\"",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -591,10 +653,6 @@
     "named": false
   },
   {
-    "type": "Context",
-    "named": false
-  },
-  {
     "type": "String",
     "named": false
   },
@@ -605,6 +663,10 @@
   {
     "type": "comment",
     "named": true
+  },
+  {
+    "type": "else",
+    "named": false
   },
   {
     "type": "escape_sequence",
@@ -620,10 +682,6 @@
   },
   {
     "type": "fn",
-    "named": false
-  },
-  {
-    "type": "i32",
     "named": false
   },
   {
