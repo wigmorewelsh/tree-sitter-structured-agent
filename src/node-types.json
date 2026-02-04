@@ -1,5 +1,36 @@
 [
   {
+    "type": "argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "placeholder",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "argument_list",
     "named": true,
     "fields": {},
@@ -8,7 +39,7 @@
       "required": false,
       "types": [
         {
-          "type": "expression",
+          "type": "argument",
           "named": true
         }
       ]
@@ -74,11 +105,7 @@
           "named": true
         },
         {
-          "type": "if_expression",
-          "named": true
-        },
-        {
-          "type": "placeholder",
+          "type": "if_else_expression",
           "named": true
         },
         {
@@ -236,20 +263,24 @@
     }
   },
   {
-    "type": "if_expression",
+    "type": "if_else_expression",
     "named": true,
     "fields": {
       "alternative": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "block",
+            "type": "expression",
             "named": true
           },
           {
-            "type": "if_expression",
-            "named": true
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       },
@@ -258,18 +289,38 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string_literal",
             "named": true
           }
         ]
       },
       "consequence": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "block",
+            "type": "expression",
             "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
           }
         ]
       }
@@ -286,10 +337,6 @@
           {
             "type": "block",
             "named": true
-          },
-          {
-            "type": "if_statement",
-            "named": true
           }
         ]
       },
@@ -298,7 +345,19 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string_literal",
             "named": true
           }
         ]
@@ -324,11 +383,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "string_literal",
+          "type": "expression",
           "named": true
         }
       ]
@@ -458,7 +513,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "select_clause",
@@ -473,7 +528,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "definition",
@@ -545,10 +600,6 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "unit_type",
           "named": true
         }
@@ -605,7 +656,19 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "string_literal",
             "named": true
           }
         ]
@@ -621,7 +684,7 @@
     "named": false
   },
   {
-    "type": "\"\"\"",
+    "type": "'''",
     "named": false
   },
   {
