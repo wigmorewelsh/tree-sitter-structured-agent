@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Structured Agent Contributors"]
 description = "Tree-sitter grammar for Structured Agent language"
-license = "MIT"
+license.workspace = true
 repository = "https://github.com/your-repo/tree-sitter-structured-agent"
 
 [lib]
